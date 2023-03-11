@@ -167,6 +167,7 @@ while True:
         print("\nChat history stored and script stopped.")
         break  # Exit the loop
     
+    # Append the user prompt to the chat history file
     messages.append({"role": "user", "content": content})
 
     completion = openai.ChatCompletion.create(
