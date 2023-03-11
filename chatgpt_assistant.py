@@ -101,6 +101,13 @@ def read_summary(filename):
         else:
             return("No summary found.")
 
+# Check for a 'history'-folder in the cwd and if it does not exist make it
+cwd = os.getcwd()
+history_folder = os.path.join(cwd, "history")
+
+if not os.path.exists(history_folder):
+    os.makedirs(history_folder)
+
 # Ask the user if they want to load a chat history file
 load_file = input("Do you want to load a chat history file? (y/n): ")
 
