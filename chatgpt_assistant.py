@@ -1,4 +1,5 @@
-import openai
+# Necessary packages to import
+import openai # Can be installed by using pip install openai
 import os
 import datetime
 
@@ -7,14 +8,42 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Initialize messages as an empty list
 messages = []
 
-# Define a function to generate the filename for the chat history file
 def get_filename():
+    """Returns a string representing a filename that includes the current date and time.
+
+    This function uses the current date and time to create a filename in the following format: 
+    'chat_YYYY-MM-DD HH-MM-SS.txt'. The filename can be used to save chat logs, for 
+    example.
+
+    Returns:
+    --------
+    filename : str
+        A string representing a filename with the current date and time included, in the 
+        format 'chat_YYYY-MM-DD HH-MM-SS.txt'.
+    """
     now = datetime.datetime.now()
     date_string = now.strftime("%Y-%m-%d %H-%M-%S")
     return f"chat_{date_string}.txt"
 
-# Define a function to replace the summary in the chat history file
 def replace_summary(filename, new_text):
+    """Replaces the 'Summary' section in a text file with new text.
+
+    This function searches for the 'Summary' section identified by the keyword "Summary: "
+    in the specified text file, and replaces it with the provided `new_text`. If the keyword
+    is not found in the file, no modifications are made.
+
+    Parameters:
+    -----------
+    filename : str
+        The name of the text file to modify.
+    new_text : str
+        The new text to replace the existing 'Summary' section with.
+
+    Returns:
+    --------
+    None
+        This function does not return any values; it modifies the specified file in place.
+    """
     with open(filename, "r+") as f:
         text = f.read()
 
@@ -38,6 +67,23 @@ def replace_summary(filename, new_text):
             print("\nKeyword not found in file.")
 
 def read_summary(filename):
+    """Reads the 'Summary' section from a text file.
+
+    This function reads the contents of a text file with the specified filename and
+    extracts the 'Summary' section identified by the keyword "Summary: ". If the
+    keyword is not found in the file, the function returns 'No summary found.'.
+
+    Parameters:
+    -----------
+    filename : str
+        The name of the text file to read the summary from.
+
+    Returns:
+    --------
+    summary : str
+        The text of the 'Summary' section in the specified file. If the summary is not
+        found, returns 'No summary found.'.
+    """
     with open(filename, "r") as f:
         text = f.read()
 
