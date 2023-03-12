@@ -1,4 +1,4 @@
-6# Necessary packages to import
+# Necessary packages to import
 import openai # Can be installed by using pip install openai
 import os
 import datetime
